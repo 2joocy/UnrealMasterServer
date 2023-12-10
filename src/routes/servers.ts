@@ -32,7 +32,7 @@ export function ServerController({
     console.log(sessions);
     const serverIds = sessions.map((session) => session.server_id);
     const servers = await serverRepository.readAllFromIds(serverIds);
-    res.status(200).json(servers);
+    res.status(200).json({ servers });
   }
   return router;
 }
