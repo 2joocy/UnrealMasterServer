@@ -20,7 +20,7 @@ export function ServerController({
 
   async function create(req: express.Request, res: express.Response) {
     const { name, port } = req.body;
-    const ip = req.socket.remoteAddress || "";
+    const ip = req.headers["x-forwarded-for"] || req.socket.remoteAddress;
     const id = randomUUID();
     await serverRepository.create(id, name, `${ip}:${port}`);
     const server = await serverRepository.read(id);
